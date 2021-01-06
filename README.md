@@ -1,1 +1,1 @@
-# Continuous-secondary-ice-production-initiated-by-updrafts-through-the-melting-layer
+# Continuous-SIP-initiated-by-updrafts-through-the-melting-layer
