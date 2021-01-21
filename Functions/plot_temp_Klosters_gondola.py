@@ -23,8 +23,6 @@ time_rides = "C:/Continuous-SIP-initiated-by-updrafts-through-the-melting-layer/
 #To be downloaded from http://dx.doi.org/10.16904/envidat.129
 data_Klosters = 'C:/hologondel_analysis/Data/weather_stations/raclets_weather_klosters.mat'
 #To be downloaded from http://dx.doi.org/10.16904/envidat.116
-data_Ts = np.load('Z:/3_Data/Davos2019/RACLETS_SnowDriftStation_Data_Envidat/3D_Ultrasonic/Sonic_Ts.npy')
-data_time = np.load('Z:/3_Data/Davos2019/RACLETS_SnowDriftStation_Data_Envidat/3D_Ultrasonic/Sonic_time.npy');
 
 def datenum(d):
     return 366 + d.toordinal() + (d - datetime.fromordinal(d.toordinal())).total_seconds()/(24*60*60)
