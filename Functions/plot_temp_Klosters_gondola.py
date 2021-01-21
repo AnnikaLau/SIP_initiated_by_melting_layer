@@ -40,11 +40,15 @@ data_KLA = mat['WS']
 T_KLA = data_KLA['T']
 T_KLA = T_KLA[0][0][0]
 T_KLA = np.array(T_KLA,dtype=np.float)
+RH_KLA = data_KLA['RH']
+RH_KLA = RH_KLA[0][0][0]
+RH_KLA = np.array(RH_KLA,dtype=np.float)
 time_KLA = data_KLA['time']
 time_KLA = time_KLA[0][0][0]
 time_KLA = np.array([datestr(time_KLA[i]) for i in range(len(time_KLA))])
 index_KLA = pd.DatetimeIndex(time_KLA)
 T_KLA = pd.Series(T_KLA,index = index_KLA)
+RH_KLA = pd.Series(RH_KLA,index=index_KLA)
 
 
 #Read in log file from HOLIMO
@@ -58,6 +62,7 @@ second = log['second'][0]
 time_gondel = [str(day_of_month[i])+'/'+str(month[i])+'/'+str(year[i])+' ' +str(hour[i])+':'+str(minute[i])+':'+str(second[i]) for i in range(0,len(month))]
 index_gondel = pd.DatetimeIndex(time_gondel)
 T_gondel = pd.Series(log['temp'][0],index = index_gondel)
+RH_gondel = pd.Series(log['rh'][0],index = index_gondel)
 time_gondel = [datenum(index_gondel[i]) for i in range(0,len(index_gondel))]
 
 
@@ -68,32 +73,24 @@ time_gondel = [datenum(index_gondel[i]) for i in range(0,len(index_gondel))]
 #Derive temperature at Gotschnaboden (Gondola at lowest point considered for measurements)
 idx_gb = [np.argmin(np.abs(time_gondel-start_time_ride[i])) for i in range(0,len(start_time_ride))]
 T_GB=T_gondel[idx_gb]
+RH_GB=RH_gondel[idx_gb]
 index_GB = index_gondel[idx_gb]
 T_GB = pd.Series(T_GB,index=index_GB)
+RH_GB = pd.Series(RH_GB,index=index_GB)
+#Derive temperature at Gotschnagrat (Gondola at highest point considered for measurements)
+idx_gg = [np.argmin(np.abs(time_gondel-end_time_ride[i])) for i in range(0,len(end_time_ride))]
+T_GG=T_gondel[idx_gg]
+RH_GG=RH_gondel[idx_gg]
+index_GG = index_gondel[idx_gg]
+T_GG = pd.Series(T_GG,index=index_GG)
+RH_GG = pd.Series(RH_GG,index=index_GG)
 
-#Derive temperature Gotschnagrat from snowdriftstation
-date = pd.to_datetime(data_time)
-index = pd.DatetimeIndex(date)
-Ts = pd.Series(data_Ts, index=index)
-Ts.index = Ts.index - pd.DateOffset(hours=1)
-Ts_190222 = Ts[start_time:end_time]
-Ts_av = []
-time_190222 = []
-Ts_190222_av = []
-for i in range(0,144): #10hours = 600*10minutes
-    start_time_av = Ts_190222.index[0]+pd.DateOffset(minutes=5*i)
-    end_time_av = Ts_190222.index[0]+pd.DateOffset(minutes=5*(i+1))
-    Ts_190222_av.append(np.mean(Ts_190222[start_time_av:end_time_av]))
-    time_190222.append(Ts_190222.index[0]+pd.DateOffset(minutes=5*i+5))
-Ts_190222_av = pd.Series(Ts_190222_av,index=time_190222)
-#Find temperature of Gotschnagrat at end_time_ride
-for i in range(0,len(time_190222)):
-    time_190222[i] = datenum(time_190222[i])
-idx_gg = [np.argmin(np.abs(time_190222-end_time_ride[i])) for i in range(0,len(end_time_ride))]
 time_gb = np.array([datestr(start_time_ride[i]) for i in range(len(start_time_ride))])
 time_gg = np.array([datestr(end_time_ride[i]) for i in range(len(end_time_ride))])
 x_gr = np.column_stack((time_gb,time_gg))
-y_gr = np.column_stack((T_GB,Ts_190222_av[idx_gg]))
+#y_gr = np.column_stack((T_GB,Ts_190222_av[idx_gg]))
+y_gr = np.column_stack((T_GB,T_GG))
+y_gr_RH = np.column_stack((RH_GB,RH_GG))
 
 
 #Melting layer
@@ -108,9 +105,9 @@ melting = pd.Series(melting, index=index_melting)
 fs=25
 f=1
 plt.figure(f)
-f=f+1
 gr = plt.plot(x_gr.transpose()[:,3:-1],y_gr.transpose()[:,3:-1],color = [0.7, 0.7, 0.7])
-go, = plt.plot(Ts_190222_av[start_time:end_time].index,Ts_190222_av[start_time:end_time],label='Gotschnagrat 2300m',color = [0,0.447,0.741])
+#go, = plt.plot(Ts_190222_av[start_time:end_time].index,Ts_190222_av[start_time:end_time],label='Gotschnagrat 2300m',color = [0,0.447,0.741])
+gg, = plt.plot(T_GG[start_time:end_time].index,T_GG[start_time:end_time],label='Gotschnagrat 2300m',color = [0,0.447,0.741])
 gb, = plt.plot(T_GB[start_time:end_time].index,T_GB[start_time:end_time],label='Gotschnaboden 1700m',color = [0.9290, 0.6940, 0.1250])
 kla, = plt.plot(T_KLA[start_time:end_time].index,T_KLA[start_time:end_time],label='Klosters 1200m',color = [0, 0.5, 0])
 m = plt.plot(melting[start_time:end_time].index,melting[start_time:end_time],'k')
@@ -125,5 +122,28 @@ plt.ylabel('Temperature (°C)',fontsize=fs)
 plt.tick_params(right=True)
 plt.yticks(fontsize=fs)
 plt.xticks(fontsize=fs)
+plt.show()
+
+f=2
+plt.figure(f)
+gr = plt.plot(x_gr.transpose()[:,3:-1],y_gr_RH.transpose()[:,3:-1],color = [0.7, 0.7, 0.7])
+#go, = plt.plot(Ts_190222_av[start_time:end_time].index,Ts_190222_av[start_time:end_time],label='Gotschnagrat 2300m',color = [0,0.447,0.741])
+gg, = plt.plot(RH_GG[start_time:end_time].index,RH_GG[start_time:end_time],label='Gotschnagrat 2300m',color = [0,0.447,0.741])
+gb, = plt.plot(RH_GB[start_time:end_time].index,RH_GB[start_time:end_time],label='Gotschnaboden 1700m',color = [0.9290, 0.6940, 0.1250])
+kla, = plt.plot(RH_KLA[start_time:end_time].index,RH_KLA[start_time:end_time],label='Klosters 1200m',color = [0, 0.5, 0])
+#m = plt.plot(melting[start_time:end_time].index,melting[start_time:end_time],'k')
+plt.gcf().autofmt_xdate()
+plt.gca().xaxis.set_major_formatter(myFmt)
+#plt.gca().invert_yaxis()
+plt.xlim(start_time,end_time)
+plt.ylim(75,100)
+plt.xlabel('Time (UTC)',fontsize=fs)
+plt.ylabel('RH (%)',fontsize=fs)
+# plt.legend(loc=3)
+plt.tick_params(right=True)
+plt.yticks(fontsize=fs)
+plt.xticks(fontsize=fs)
+plt.show()
+
 
 
