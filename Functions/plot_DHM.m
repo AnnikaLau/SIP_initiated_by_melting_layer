@@ -4,6 +4,9 @@
 %ypos = [-10 10];
 %plot_DHM(x,y,grid,'large',xpos,ypos,0);
 %plot_DHM(x,y,grid,'small',xpos,ypos,0);
+%xpos = [-17 10];
+%ypos = [-10 15];
+%plot_DHM(x,y,grid,'small',xpos,ypos,1);
 
 function [u,v,a1,b1,wd,ws] = plot_DHM(x,y,grid,grid_size,xpos,ypos,wind)
 FS = 14; %Fontsize
