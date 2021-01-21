@@ -1,8 +1,8 @@
 % Adapted
-function [cl31, pwd, WS600]=get_Klosters_data_from_files(start_str,end_str,root_folder)
+function [cl31, pwd, WS600]=read_ceilometer(start_str,end_str,root_folder)
 %==========================================================================
 % [cl31, pwd, WS600]= get_kloster_from_files(start_str,end_str,[root_folder])
-% This function read CL31 abnd other instruments installed at Klosters for Davos 2019 field campaign
+% This function read CL31 and other instruments installed at Klosters for Davos 2019 field campaign
 % Preallocation is made using number of files:
 %
 % Input parameters:  start_str,end_str : start and end time as string
