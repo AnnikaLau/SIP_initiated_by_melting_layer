@@ -5,19 +5,6 @@
 function save_particle_images(cD_data,saving_folder,prop)
 load(cD_data)
 map = gray;
-%delete data in the afternoon and before 8
-a = [];
-for i = 1:length(temp1.prtclID)
-    t = split(temp1.prtclID{i},'-');
-    t = str2double(t{4});
-    if t<10 && t>7% && temp1.class(i) ~= 'Out_of_focus'
-        a = [a;i];
-    end
-end
-temp1.prtclID = temp1.prtclID(a);
-temp1.metricmat = temp1.metricmat(a,:);
-temp1.prtclIm =temp1.prtclIm(a);
-temp1.class = temp1.class(a);
 
 for i = 1:length(temp1.prtclIm)
     h = abs(temp1.prtclIm{i});
