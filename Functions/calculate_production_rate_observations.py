@@ -13,7 +13,7 @@ t93_272,t60_272,t39_272 = diffusional_growth_plates(272,93e-6)
 
 conc_60_93 = 0.9
 conc_60_93_unc = 0.3
-conc_39_93 = 2.2
+conc_39_93 = 2.1
 conc_39_93_unc = 0.5
 
 t93_60_271 = t93_271-t60_271

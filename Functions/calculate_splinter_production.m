@@ -36,8 +36,8 @@ disp(strcat('The splinter generation rate per minute per litre is ',{' '},SI,...
 %Find out new Nsp to explain observed production rate
 %Min and max production rate
 %Estimated splinter production rate of case study
-pr_min = (0.25-0.08)*1e3/60; %m^-3 s^-1
-pr_max = (0.25+0.08)*1e3/60; %m^-3 s^-1;
+pr_min = (0.24-0.09)*1e3/60; %m^-3 s^-1
+pr_max = (0.24+0.09)*1e3/60; %m^-3 s^-1;
 
 aNsp2_min = aNsp;
 yGspd2_min = yfcol_d.*ypdf_d*aNsp2_min.*d;
