@@ -9,7 +9,6 @@ radar_time = datenum(0,0,0,radar_time_tmp,0,0)+datenum(YMD,'yyyymmdd');
 radar_height = ncread(filepath,'height');
 model_height = ncread(filepath,'model_height');
 
-
 for i = 1:length(par)
     data_tmp.(par{i}) = ncread(filepath,par{i});
 end

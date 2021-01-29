@@ -6,7 +6,7 @@ fileID =fopen('C:\melting_layer\Data\HoloGondel\190222_runs_gondola_up.txt','r')
 formatSpec ='%d%s%d%s%2d\n';
 sizeA = [5,n_runs*2];
 A = fscanf(fileID,formatSpec,sizeA);
-fclose(fileID)
+fclose(fileID);
 year = 2019;
 month = 2;
 day = 22;
