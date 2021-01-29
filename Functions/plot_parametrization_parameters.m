@@ -27,12 +27,12 @@ figure(1)
 subplot(2,2,1)
 %Plot Gsp
 plot(x*1e6,Gsp_x*tau,'r')
-title('Splinter generation rate')
+%title('Splinter generation rate')
 hold on
 scatter(d*1e6,yGsp_d.*tau,ms,'bo')
 hold on 
 xlim([40 400])
-ylabel('G_{sp} (min^{-1})')
+ylabel('g_{sp} (min^{-1})')
 set(gca,'Fontsize',fs);
 box on
 %Plot amount of secondary ice Gsp_new
@@ -44,7 +44,7 @@ scatter(d*1e6,yGsp_d_new*tau,ms,'bo')
 %Probability of freezing
 subplot(2,2,2)
 plot(x*1e6,f_col_x*tau*100,'r')
-title('Freezing rate')
+%title('Freezing rate')
 hold on
 scatter(d*1e6,f_col*tau*100,ms,'bo')
 xlim([40 400])
@@ -55,7 +55,7 @@ box on;
 %Proabability of fragmentation
 subplot(2,2,3)
 plot(x*1e6,ypdf_x*100,'r')
-title('Probability of fragmentation')
+%title('Probability of fragmentation')
 hold on
 scatter(d*1e6,ypdf_d.*100,ms,'bo')
 hold on 
@@ -74,7 +74,7 @@ scatter(d*1e6,repmat(100,length(d),1),ms,'bo')
 %Plot number of fragments Nsp
 subplot(2,2,4)
 plot(x*1e6,yNsp_x,'r')
-title('Number of splinters per fragmentation')
+%title('Number of splinters per fragmentation')
 hold on
 scatter(d*1e6,yNsp_d,ms,'bo')
 xlim([40 400])

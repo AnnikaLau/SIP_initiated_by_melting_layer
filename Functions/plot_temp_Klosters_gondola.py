@@ -18,8 +18,8 @@ from read_time_rides import *
 myFmt = mdates.DateFormatter('%H:%M')
 start_time = '2019-02-22 08:00:00'
 end_time = '2019-02-22 10:00:00'
-log_file = 'C:/Continuous-SIP-initiated-by-updrafts-through-the-melting-layer/Data/190222_holimo_log.txt'
-time_rides = "C:/Continuous-SIP-initiated-by-updrafts-through-the-melting-layer/Data/190222_runs_gondola_up.txt"
+log_file = 'C:/melting_layer/Data/HoloGondel/190222_holimo_log.txt'
+time_rides = "C:/melting_layer/Data/HoloGondel/190222_runs_gondola_up.txt"
 #To be downloaded from http://dx.doi.org/10.16904/envidat.129
 data_Klosters = 'C:/hologondel_analysis/Data/weather_stations/raclets_weather_klosters.mat'
 #To be downloaded from http://dx.doi.org/10.16904/envidat.116
