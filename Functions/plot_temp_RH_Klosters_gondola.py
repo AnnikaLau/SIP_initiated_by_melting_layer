@@ -21,8 +21,7 @@ end_time = '2019-02-22 10:00:00'
 log_file = 'C:/melting_layer/Data/HoloGondel/190222_holimo_log.txt'
 time_rides = "C:/melting_layer/Data/HoloGondel/190222_runs_gondola_up.txt"
 #To be downloaded from http://dx.doi.org/10.16904/envidat.129
-data_Klosters = 'C:/hologondel_analysis/Data/weather_stations/raclets_weather_klosters.mat'
-#To be downloaded from http://dx.doi.org/10.16904/envidat.116
+data_Klosters = 'C:/melting_layer/Data/weather_stations/raclets_weather_klosters.mat'
 
 def datenum(d):
     return 366 + d.toordinal() + (d - datetime.fromordinal(d.toordinal())).total_seconds()/(24*60*60)
@@ -86,7 +85,6 @@ RH_GG = pd.Series(RH_GG,index=index_GG)
 time_gb = np.array([datestr(start_time_ride[i]) for i in range(len(start_time_ride))])
 time_gg = np.array([datestr(end_time_ride[i]) for i in range(len(end_time_ride))])
 x_gr = np.column_stack((time_gb,time_gg))
-#y_gr = np.column_stack((T_GB,Ts_190222_av[idx_gg]))
 y_gr = np.column_stack((T_GB,T_GG))
 y_gr_RH = np.column_stack((RH_GB,RH_GG))
 
@@ -103,8 +101,7 @@ melting = pd.Series(melting, index=index_melting)
 fs=25
 f=1
 plt.figure(f)
-gr = plt.plot(x_gr.transpose()[:,3:-1],y_gr.transpose()[:,3:-1],color = [0.7, 0.7, 0.7])
-#go, = plt.plot(Ts_190222_av[start_time:end_time].index,Ts_190222_av[start_time:end_time],label='Gotschnagrat 2300m',color = [0,0.447,0.741])
+gr = plt.plot(x_gr.transpose(),y_gr.transpose(),color = [0.7, 0.7, 0.7])
 gg, = plt.plot(T_GG[start_time:end_time].index,T_GG[start_time:end_time],label='Gotschnagrat 2300m',color = [0,0.447,0.741])
 gb, = plt.plot(T_GB[start_time:end_time].index,T_GB[start_time:end_time],label='Gotschnaboden 1700m',color = [0.9290, 0.6940, 0.1250])
 kla, = plt.plot(T_KLA[start_time:end_time].index,T_KLA[start_time:end_time],label='Klosters 1200m',color = [0, 0.5, 0])
@@ -116,7 +113,6 @@ plt.xlim(start_time,end_time)
 plt.ylim(4,-3)
 plt.xlabel('Time (UTC)',fontsize=fs)
 plt.ylabel('Temperature (°C)',fontsize=fs)
-# plt.legend(loc=3)
 plt.tick_params(right=True)
 plt.yticks(fontsize=fs)
 plt.xticks(fontsize=fs)
@@ -124,20 +120,16 @@ plt.show()
 
 f=2
 plt.figure(f)
-gr = plt.plot(x_gr.transpose()[:,3:-1],y_gr_RH.transpose()[:,3:-1],color = [0.7, 0.7, 0.7])
-#go, = plt.plot(Ts_190222_av[start_time:end_time].index,Ts_190222_av[start_time:end_time],label='Gotschnagrat 2300m',color = [0,0.447,0.741])
+gr = plt.plot(x_gr.transpose(),y_gr_RH.transpose(),color = [0.7, 0.7, 0.7])
 gg, = plt.plot(RH_GG[start_time:end_time].index,RH_GG[start_time:end_time],label='Gotschnagrat 2300m',color = [0,0.447,0.741])
 gb, = plt.plot(RH_GB[start_time:end_time].index,RH_GB[start_time:end_time],label='Gotschnaboden 1700m',color = [0.9290, 0.6940, 0.1250])
 kla, = plt.plot(RH_KLA[start_time:end_time].index,RH_KLA[start_time:end_time],label='Klosters 1200m',color = [0, 0.5, 0])
-#m = plt.plot(melting[start_time:end_time].index,melting[start_time:end_time],'k')
 plt.gcf().autofmt_xdate()
 plt.gca().xaxis.set_major_formatter(myFmt)
-#plt.gca().invert_yaxis()
 plt.xlim(start_time,end_time)
 plt.ylim(75,100)
 plt.xlabel('Time (UTC)',fontsize=fs)
 plt.ylabel('RH (%)',fontsize=fs)
-# plt.legend(loc=3)
 plt.tick_params(right=True)
 plt.yticks(fontsize=fs)
 plt.xticks(fontsize=fs)

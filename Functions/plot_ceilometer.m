@@ -1,8 +1,8 @@
 %start_str = '20190222060000';
 %end_str = '20190222120000';
 %Get ceilometer data from: http://dx.doi.org/10.16904/envidat.127
-%root_folder='Z:\3_Data\Davos2019\Ceilometer\'
-%[cl31, pwd, WS600]=get_Klosters_data_from_files(start_str,end_str,root_folder)
+%root_folder='C:\melting_layer\Data\Ceilometer\'
+%[cl31, ~, ~]=get_Klosters_data_from_files(start_str,end_str,root_folder)
 function plot_ceilometer(cl31,start_str,end_str)
 %==========================================================================
 
@@ -35,15 +35,7 @@ GB = [1.8,1.8];
 GG = [2.3,2.3];
 
 %Create lines for runs of Gotschnabahn
-runs = [datenum(2019,02,22,08,07,17),datenum(2019,02,22,08,10,04);...
-    datenum(2019,02,22,08,17,58),datenum(2019,02,22,08,20,16);...
-    datenum(2019,02,22,08,29,00),datenum(2019,02,22,08,31,20);...
-    datenum(2019,02,22,08,40,06),datenum(2019,02,22,08,42,27);...
-    datenum(2019,02,22,08,51,20),datenum(2019,02,22,08,53,39);...
-    datenum(2019,02,22,09,04,54),datenum(2019,02,22,09,07,10);...
-    datenum(2019,02,22,09,16,04),datenum(2019,02,22,09,18,21);...
-    datenum(2019,02,22,09,28,29),datenum(2019,02,22,09,30,51);...
-    datenum(2019,02,22,09,45,55),datenum(2019,02,22,09,48,20)];
+runs = get_runs();
 y_runs = zeros(size(runs));
 y_runs(:,1) = 1.8;
 y_runs(:,2) = 2.3;
