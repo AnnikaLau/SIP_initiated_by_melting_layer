@@ -1,7 +1,6 @@
 load('Z:\6_Auswertung\Annika\2019_RACLETS\Wolken\2019_02_22\GE25e-6\RACLETS_merged_8-10h_rescaled_habits_wolke')
 temp1 = classificationData(this);
 V = sum(this.tsData.Ice.data.volume);
-% habits = {'Ice','Ice_Aged','Ice_Column','Ice_Irregular','Ice_Plate','Ice_Unidentified','Ice_Out_of_focus'};
 habits = {'Ice_Plate','Ice_Unidentified','Ice_Column','Ice_Irregular','Ice_Aged'};
 apply_rules(temp1,'classes',habits);
 mr = find(contains(temp1.metricnames,'majsizRescale')==1);
@@ -13,11 +12,7 @@ for i = 1:length(habits)
     totalCount.(habits{i}) = sum(this.tsData.(habits{i}).data.totalCount);
     conc.(habits{i}) = totalCount.(habits{i})*1e-3/V;
     majsiz.(habits{i}) = majsizRescale(temp1.class == habits{i});
-    if isequal(habits{i},'Ice_Aged')
-        unc.(habits{i}) = conc.(habits{i})*0.05+sqrt(totalCount.(habits{i}))*1e-3/V;
-    else
-        unc.(habits{i}) = conc.(habits{i})*0.15+sqrt(totalCount.(habits{i}))*1e-3/V;
-    end
+    unc.(habits{i}) = get_uncertainty_ice(majsiz.(habits{i}),V)*1e-3;
 end
 
 %Small plates
@@ -45,13 +40,10 @@ y = y';
 
 figure(2)  
 bar(y,1,'stacked');
-% set(h,{'FaceColor'},col);
 xlim([0.5, 10.5]) 
 edges = 0.5:1:10.5;
-% set(gca, 'xscale','log')
 xticks(edges)
 xticklabels({'25','39','60','93','145','224','347','537','832','1288','1995'})
-%xticklabels({'40','60','91','138','209','316','479','724','1097','1660'})
 xtickangle(45)
 set(gca,'Fontsize',fs)
 xlabel('Major axis (µm)')

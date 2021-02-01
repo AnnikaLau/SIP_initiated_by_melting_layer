@@ -23,17 +23,20 @@ V = sum(this.tsData.Total.data.volume);
 v = sum(iData.Total.volume);
 conc_tot = [];
 conc_unc = [];
+majsizRescale = this.pData.majsizRescale;
+class = cellstr(this.pData.catPredict);
 for i = 1:length(classes)
     if isequal(classes{i},'Water')
         conc.(classes{i}) = sum(this.tsData.(classes{i}).data.totalCount)*1e-6/V + sum(iData.Water.totalCount)*1e-6/v;
         unc.(classes{i}) = conc.(classes{i})*0.06;
     else
+        majsiz.(classes{i}) = majsizRescale(contains(class,classes{i}));
         totCount.(classes{i}) = sum(this.tsData.(classes{i}).data.totalCount);
         conc.(classes{i}) = totCount.(classes{i})*1e-3/V;
         if isequal(classes{i},'Water40')
             unc.(classes{i}) = conc.(classes{i})*0.06+sqrt(totCount.(classes{i}))*1e-3/V;
         else
-            unc.(classes{i}) = conc.(classes{i})*0.15+sqrt(totCount.(classes{i}))*1e-3/V;
+            unc.(classes{i}) = get_uncertainty_ice(majsiz.(classes{i}),V)*1e-3;
         end
     end
     conc_tot = [conc_tot;conc.(classes{i})];
