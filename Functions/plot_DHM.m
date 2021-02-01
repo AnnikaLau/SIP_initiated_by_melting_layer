@@ -92,6 +92,7 @@ set(gca,'layer','top');
 
 
 if wind==1
+    %Use function get_wind_IDAWEB.py to get the wind data
     stat = {'TSG','DAV','SLFPAR','NABDAV','SLFSLF','SLFWFJ','SLFKL3','SLFKL2',...
         'SLFKLO','SRS','WFJ','ARO','ARD','Holfuy'};
     px = [770100,783518,780430,784460,783800,780850,790100,785500,785050,769617,...
