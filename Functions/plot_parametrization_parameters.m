@@ -3,7 +3,7 @@ fs = 25;
 ms = 400;
 tau = 60;
 V = 43.7e-3; %L
-x = 40e-6:1e-7:400e-6;
+x = (40e-6:1e-7:400e-6)';
 load('C:\melting_layer\Data\HoloGondel\droplets_ge_40e-6_cD')
 d = temp1.metricmat(:,114);
 d = sort(d);
@@ -11,15 +11,20 @@ load('C:\melting_layer\Data\HoloGondel\ice_habits_cD')
 a = temp1.metricmat(:,114);
 class = temp1.cpType;
 
-f_col = get_fcol(d,a,class,V);
-f_col_x = get_fcol(x,a,class,V);
-[apdf,ypdf_d,aNsp,yNsp_d,aNsp_new,yNsp_new,yGsp_d,yGsp_d_new] = calculate_splinter_production();
 
-ypdf_x = apdf*(x.^2);
+[aNsp,aNsp_new] = calculate_splinter_production();
+f_col_d = get_fcol(d,a,class,V);
+f_col_x = get_fcol(x,a,class,V);
+ypdf_x = get_pdf(x);
+ypdf_d = get_pdf(d);
 yNsp_x = aNsp*x;
 yNsp_x_new = aNsp_new*x;
-Gsp_x = f_col_x.*ypdf_x'.*yNsp_x';
-Gsp_x_new = f_col_x.*yNsp_x_new';
+yNsp_d = aNsp*d;
+yNsp_d_new = aNsp_new*d;
+Gsp_x = f_col_x.*ypdf_x.*yNsp_x;
+Gsp_d = f_col_d.*ypdf_d.*yNsp_d;
+Gsp_x_new = f_col_x.*yNsp_x_new;
+Gsp_d_new = f_col_d.*yNsp_d_new;
 
 
 %Plot Gsp
@@ -29,7 +34,7 @@ subplot(2,2,1)
 plot(x*1e6,Gsp_x*tau,'r')
 %title('Splinter generation rate')
 hold on
-scatter(d*1e6,yGsp_d.*tau,ms,'bo')
+scatter(d*1e6,Gsp_d.*tau,ms,'bo')
 hold on 
 xlim([40 400])
 ylabel('g_{sp} (min^{-1})')
@@ -39,14 +44,14 @@ box on
 hold on
 plot(x*1e6,Gsp_x_new*tau,'r--')
 hold on
-scatter(d*1e6,yGsp_d_new*tau,ms,'bo')
+scatter(d*1e6,Gsp_d_new*tau,ms,'bo')
 
 %Probability of freezing
 subplot(2,2,2)
 plot(x*1e6,f_col_x*tau*100,'r')
 %title('Freezing rate')
 hold on
-scatter(d*1e6,f_col*tau*100,ms,'bo')
+scatter(d*1e6,f_col_d*tau*100,ms,'bo')
 xlim([40 400])
 ylabel('f_{col} (% min^{-1})')
 set(gca,'Fontsize',fs);
@@ -86,7 +91,7 @@ box on;
 hold on
 plot(x*1e6,yNsp_x_new,'r--')
 hold on
-scatter(d*1e6,yNsp_new,ms,'bo')
+scatter(d*1e6,yNsp_d_new,ms,'bo')
 
 
 

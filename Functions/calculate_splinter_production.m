@@ -1,6 +1,6 @@
-function [apdf,ypdf_d,aNsp,yNsp_d,aNsp_new,yNsp_new,yGsp_d,yGsp_d_new] = calculate_splinter_production()
+function [aNsp,aNsp_new] = calculate_splinter_production()
 %Load all particles larger than 40µm
-load('C:\melting_layer\Data\HoloGondel\droplets_ge_40e-6_cD')
+load('C:\melting_layer\Data\HoloGondel\droplets_ge_40e-6_cD');
 d = temp1.metricmat(:,114);
 d = sort(d);
 %Droplet concentration:
@@ -17,8 +17,7 @@ Vt_d = get_fall_velocity(d,'Water');
 yfcol_d = get_fcol(d,a,class,V);
 
 %Fragmentation probability
-apdf = 4.4e6; 
-ypdf_d = apdf*(d.^2);
+ypdf_d = get_pdf(d);
 
 %Number of fragments
 aNsp = 9e4;
@@ -91,6 +90,5 @@ disp(strcat('A droplet with 200µm produces ',{' '}, num2str(s_mean),'\pm',...
 
 % %Number of fragments after tuning
 aNsp_new = (aNsp3_max+aNsp3_min)/2;
-yNsp_new = aNsp_new*d;
 yGsp_d_new = yfcol_d*aNsp_new.*d;
 end
