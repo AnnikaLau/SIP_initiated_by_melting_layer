@@ -1,5 +1,9 @@
-load('Z:\6_Auswertung\Annika\2019_RACLETS\Wolken\2019_02_22\GE25e-6\RACLETS_merged_8-10h_rescaled_habits_wolke')
-load('Z:\6_Auswertung\Annika\2019_RACLETS\Wolken\2019_02_22\LT25e-6\RACLETS_merged_8-10h_lt25e-6_rescaled_habits_iData')
+load('Z:\6_Auswertung\Annika\2019_RACLETS\Wolken\2019_02_22\GE25e-6\RACLETS_merged_8-10h_rescaled_habits_iData')
+iData_big = iData;
+load('Z:\6_Auswertung\Annika\2019_RACLETS\Wolken\2019_02_22\LT25e-6\RACLETS_merged_8-10h_lt25e-6_iData')
+iData_small = iData;
+clear iData
+load('C:\melting_layer\Data\HoloGondel\ice_habits_cD')
 
 leg = {'CDNC (*10^{-3})','CDNC (d>40µm)','ICNC','Plates'};%
 classes = {'Water','Water40','Ice','Ice_Plate'};%
@@ -19,19 +23,20 @@ ms = 300;
 f=1;
 
 %Total concentration in the whole measurement volume
-V = sum(this.tsData.Total.data.volume);
-v = sum(iData.Total.volume);
+V = sum(iData_big.Total.volume);
+v = sum(iData_small.Total.volume);
 conc_tot = [];
 conc_unc = [];
-majsizRescale = this.pData.majsizRescale;
-class = cellstr(this.pData.catPredict);
+majsizRescale = temp1.metricmat(:,114);
+class = temp1.cpType;
 for i = 1:length(classes)
     if isequal(classes{i},'Water')
-        conc.(classes{i}) = sum(this.tsData.(classes{i}).data.totalCount)*1e-6/V + sum(iData.Water.totalCount)*1e-6/v;
+        conc.(classes{i}) = (sum(iData_small.(classes{i}).totalCount)/V + sum(iData_small.Water.totalCount)/v)*1e-6;
         unc.(classes{i}) = conc.(classes{i})*0.06;
     else
-        majsiz.(classes{i}) = majsizRescale(contains(class,classes{i}));
-        totCount.(classes{i}) = sum(this.tsData.(classes{i}).data.totalCount);
+        idx = contains(class,classes{i});
+        majsiz.(classes{i}) = majsizRescale(idx);
+        totCount.(classes{i}) = sum(iData_big.(classes{i}).totalCount);
         conc.(classes{i}) = totCount.(classes{i})*1e-3/V;
         if isequal(classes{i},'Water40')
             unc.(classes{i}) = conc.(classes{i})*0.06+sqrt(totCount.(classes{i}))*1e-3/V;
@@ -43,31 +48,36 @@ for i = 1:length(classes)
     conc_unc = [conc_unc;unc.(classes{i})];
 end
 
-%Concentration over time
-for r=1:size(runs,1)
-    clear pos
-    pos = find(this.tsData.Total.time >= runs(r,1) & this.tsData.(classes{i}).time <= runs(r,2));
-    volume(r) = sum(this.tsData.Total.data.volume(pos));
-    volume_small(r) = sum(iData.Total.volume(pos));
-    for c = 1:length(classes)
-        if isequal(classes{c},'Water')
-            conc_time.(classes{c})(r,1) = sum(this.tsData.(classes{c}).data.totalCount(pos))*1e-3/volume(r)+...
-                sum(iData.(classes{c}).totalCount(pos))*1e-3/volume_small(r);
-        else
-            conc_time.(classes{c})(r,1) = sum(this.tsData.(classes{c}).data.totalCount(pos))*1e-3/volume(r);
-        end
-    end
-end
+% %Concentration over time
+% for r=1:size(runs,1)
+%     clear pos
+%     pos = find(this.tsData.Total.time >= runs(r,1) & this.tsData.(classes{i}).time <= runs(r,2));
+%     volume(r) = sum(this.tsData.Total.data.volume(pos));
+%     volume_small(r) = sum(iData.Total.volume(pos));
+%     for c = 1:length(classes)
+%         if isequal(classes{c},'Water')
+%             totCount_time.(classes{c})(r,1) = sum(this.tsData.(classes{c}).data.totalCount(pos));
+%             conc_time.(classes{c})(r,1) = sum(this.tsData.(classes{c}).data.totalCount(pos))*1e-3/volume(r)+...
+%                 sum(iData.(classes{c}).totalCount(pos))*1e-3/volume_small(r);
+%         else
+%             totCount_time.(classes{c})(r,1) = sum(this.tsData.(classes{c}).data.totalCount(pos));
+%             conc_time.(classes{c})(r,1) = sum(this.tsData.(classes{c}).data.totalCount(pos))*1e-3/volume(r);
+%         end
+%     end
+% end
 
 
 figure(f)
 f = f+1;
 for cnt=1:length(classes)
     if strcmp(classes{cnt},'Water')
-        conc_time.(classes{cnt}) = conc_time.(classes{cnt})*1e-3;
+        conc_Water = iData_big.Water.concentration + iData_small.Water.concentration;
+        hold on
+        scatter(runs(:,1),conc_Water,ms,col(cnt,:),mark{cnt},'MarkerFaceColor',mfc{cnt},'MarkerEdgeColor',mec{cnt});
+    else
+        hold on
+        scatter(runs(:,1),iData_big.(classes{cnt}).concentration*1e3,ms,col(cnt,:),mark{cnt},'MarkerFaceColor',mfc{cnt},'MarkerEdgeColor',mec{cnt});
     end
-    hold on
-    scatter(runs(:,1),conc_time.(classes{cnt}),ms,col(cnt,:),mark{cnt},'MarkerFaceColor',mfc{cnt},'MarkerEdgeColor',mec{cnt});
 end
 
 ylabel('Cloud particle conc. (L^{-1})','Fontsize',fs)
