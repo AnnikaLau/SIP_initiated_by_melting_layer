@@ -1,4 +1,3 @@
-% Adapted by Fabiola
 function [cl31, pwd, WS600]=get_Klosters_data_from_files(start_str,end_str,root_folder)
 %==========================================================================
 % [cl31, pwd, WS600]= get_kloster_from_files(start_str,end_str,[root_folder])
@@ -22,32 +21,10 @@ function [cl31, pwd, WS600]=get_Klosters_data_from_files(start_str,end_str,root_
 %
 % Author: Maxime Hervo
 % Date: November 2018
+% Adapted by: Annika Lauber
+% Date: February 2021
 %
 %==========================================================================
-
-%% Format Inputs
-if nargin==0
-    %by default values to test the routine
-    warning('No Input,Default values')
-    
-    start_str=datestr(now-1,'yyyymmddHHMMSS');
-    end_str  =datestr(now,'yyyymmddHHMMSS');
-    
-        
-    start_str=['20181206000000'];
-    end_str  ='20181207000000';
-    
-end
-
-
-if nargin<3
-    %define root path
-    if isunix()
-        root_folder='/data/pay/REM/ACQ/CEILO_CL31/';
-    else
-        root_folder='Z:\3_Data\Davos2019\Ceilometer\';
-    end
-end
 
 
 if length(start_str)==8
@@ -55,31 +32,20 @@ if length(start_str)==8
 end
 start_dn=datenum(start_str,'yyyymmddHHMMSS');
 
-% if nargin==3
-%     end_str =datestr(start_dn+0.9999999,'yyyymmddHHMMSS');
-% end
 
 if length(end_str)==8
     end_str=[end_str '000000'];
 end
 end_dn=datenum(end_str,'yyyymmddHHMMSS');
 
-
 disp(['Reading CL31 bulletin for ' start_str ' to ' end_str])
-
-
-ceilo_str='KLA';
-
-
-
-
 
 %% Make file list
 time_vec=floor(start_dn):floor(end_dn);
 list=[];
 folder_for_selected_files=[];
 for j=1:length(time_vec)
-    str=[root_folder  ceilo_str '/' datestr(time_vec(j),'yyyy/mm/dd/*')  datestr(time_vec(j),'yyyymmdd') '*.001'];
+    str=[root_folder '*.001'];
     list1=dir(str);
     
     
@@ -127,7 +93,6 @@ cl31.nrjfac=NaN(length(list)*max_number_profiles,1);
 cl31.laser_temp=NaN(length(list)*max_number_profiles,1);
 cl31.windows_transmission=NaN(length(list)*max_number_profiles,1);
 cl31.tilt_angle=NaN(length(list)*max_number_profiles,1);
-% cl31.measur_param=NaN(length(list)*max_number_profiles,1);
 cl31.sum_beta=NaN(length(list)*max_number_profiles,1);
 cl31.bckgrd_rcs_910=NaN(length(list)*max_number_profiles,1);
 cl31.unit_id=NaN(length(list)*max_number_profiles,1);
@@ -240,7 +205,6 @@ for k=1:length(list)
                                 cl31.bckgrd_rcs_910(j)=str2double(param_data_tmp{1}{8});
                                 measur_param_str=param_data_tmp{1}{9};
                                 cl31.pulse_qty(j)=str2double(measur_param_str(2:5))*1024;
-                                %         cl31.measur_param(j)=str2double(param_data_tmp{1}{8});
                                 cl31.sum_beta(j)=str2double(param_data_tmp{1}{10});
                                 
                                 % Profiles
@@ -346,20 +310,7 @@ for k=1:length(list)
                                         % Precipitation quantity in mm Ra M (Channel 620)
                                         % Precipitation type Rt N (Channel 700)
                                         % Precipitation intensity in mm/h Ri M (Channel 820)
-                                        %  006.6
-                                        %  008.3
-                                        %  083.0
-                                        %  083.0
-                                        %  0884.0
-                                        %  000.6
-                                        %  165.3
-                                        %  00000.05
-                                        %  000
-                                        %  000.0
-                                        
-                                        %                                     format_ws = ['%6f%6f%6f%6f'...
-                                        %                                         '%7f%6f%6f%8f%4f%6f'];
-                                        % starts at 26 to get rid of Mo
+
                                         WS600_tmp = textscan(data{1}{i+l}(26:end),'%f','delimiter',';');
                                         WS600.T(jj) = WS600_tmp{1}(1);
                                         WS600.T_dew(jj) = WS600_tmp{1}(2);
@@ -391,8 +342,7 @@ for k=1:length(list)
                                     
                                 end
                         end
-                        
-                        
+                               
                         
                         
                     otherwise

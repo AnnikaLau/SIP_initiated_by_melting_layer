@@ -1,9 +1,4 @@
-%start_str = '20190222060000';
-%end_str = '20190222120000';
-%Get ceilometer data from: http://dx.doi.org/10.16904/envidat.127
-%root_folder='C:\melting_layer\Data\Ceilometer\'
-%[cl31, ~, ~]=get_Klosters_data_from_files(start_str,end_str,root_folder)
-function plot_ceilometer(cl31,start_str,end_str)
+function plot_ceilometer(cl31,start_str,end_str,runs)
 %==========================================================================
 
 %Fontsize
@@ -35,7 +30,6 @@ GB = [1.8,1.8];
 GG = [2.3,2.3];
 
 %Create lines for runs of Gotschnabahn
-runs = get_runs();
 y_runs = zeros(size(runs));
 y_runs(:,1) = 1.8;
 y_runs(:,2) = 2.3;
