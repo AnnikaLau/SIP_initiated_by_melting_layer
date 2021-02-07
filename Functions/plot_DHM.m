@@ -1,10 +1,3 @@
-%[x,y,z] = xyzread('C:\melting_layer\Data\DHM25\DHM200.xyz');
-%grid = xyz2grid(x,y,z);
-%xpos = [-10 10];
-%ypos = [-10 10];
-%plot_DHM(x,y,grid,'large',xpos,ypos,0);
-%plot_DHM(x,y,grid,'small',xpos,ypos,0);
-
 function [u,v,a1,b1,wd,ws] = plot_DHM(x,y,grid,grid_size,xpos,ypos,wind)
 FS = 14; %Fontsize
 if strcmp(grid_size,'small')
