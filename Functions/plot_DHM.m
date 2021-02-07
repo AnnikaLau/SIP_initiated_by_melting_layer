@@ -4,9 +4,6 @@
 %ypos = [-10 10];
 %plot_DHM(x,y,grid,'large',xpos,ypos,0);
 %plot_DHM(x,y,grid,'small',xpos,ypos,0);
-%xpos = [-17 10];
-%ypos = [-10 15];
-%plot_DHM(x,y,grid,'small',xpos,ypos,1);
 
 function [u,v,a1,b1,wd,ws] = plot_DHM(x,y,grid,grid_size,xpos,ypos,wind)
 FS = 14; %Fontsize
@@ -158,7 +155,7 @@ if wind==1
     end
     speed_lims.min = 0;
     speed_lims.max = 25;
-    plot_wind_barbs(u*(-1),v*(-1),a1,b1,1,[],1.5,speed_lims);
+    windbarbs(u*(-1),v*(-1),a1,b1,1,[],1.5,speed_lims);
     
 end
 

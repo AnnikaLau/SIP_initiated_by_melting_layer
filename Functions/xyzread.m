@@ -1,4 +1,4 @@
-
+%Downloaded from: https://www.mathworks.com/matlabcentral/fileexchange/56414-xyz-file-functions
 function [x,y,z] = xyzread(filename,varargin)
 % xyzread simply imports the x,y,z columns of a .xyz file.  Note: there
 % is no real standard for .xyz files, so your .xyz file may be different

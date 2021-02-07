@@ -1,4 +1,4 @@
-
+%Downloaded from https://www.mathworks.com/matlabcentral/fileexchange/56414-xyz-file-functions
 function varargout = xyz2grid(varargin)
 % xyz2grid converts regularly-spaced columnated x,y,z data into gridded data. 
 % 
