@@ -18,10 +18,10 @@ p0 = 101325 # Pa
 M_air =(0.21*0.031998+0.79*0.0280134) # kg/mol, molar mass of dry air
 R = 8.3144598 # J/(mol K) gas constant
 Ra = R/M_air #J/(kgK), specific gas constant for dry air
-cv = 718# J/kgK specific heat of air at constant volume from "An Introduction to Clouds"
+cv = 718# J/kgK specific heat of air at constant volume from Lohmann et al. 2016 "An Introduction to Clouds: From the Microscale to Climate"
 M_H2O = 0.01801528 # kg/mol, molar mass of water
 Rv = R/M_H2O # specific gas constant of water vapor
-alp = 0.5 #Book: an introduction to clouds (p.240): Rogers & Yau 1989
+alp = 0.5 #Lohmann et al. 2016 "An Introduction to Clouds: From the Microscale to Climate" (p.240): Rogers & Yau 1989
 lam = 0.01 #deposition coefficient from Fukuta and Walter 1970, estimated from Fig. 2
 
 
@@ -78,9 +78,8 @@ def mass_hexagon_shape(a,ar,T): #Mass of a hexagonal plate with the baselength a
     h = 2*a/ar
     return(3*math.sqrt(3)*a**2*h*rhoIce(T)/2)
 
-def mass_hexagon(r): #Mass of a hexagonal plate with the baselength a and the thickness h
-    # rho = 900 #Density of hexagonal plate: Mitchell et al. 1990
-    # return(3*math.sqrt(3)*a**2*h*rho/2)
+def mass_hexagon(r): #Mass of a hexagonal plate with the maximum dimension of 2*r
+    # rho = 900 #Density of hexagonal plate: Mitchell et al. 1990, table 3
     return((0.032*(2*r*1e3)**2.5)*1e-6)
 
 def mass_column_short(r): #Mass of column short as in Mitchell et al. 1990
@@ -157,7 +156,6 @@ def find_min(dia,siz): #Find position in diameter array, which is the closest to
 
 def diffusional_growth_plates(T,d_max):
     #Conditions/Assumptions:
-    #T = 272 # K, ambient temperature  
     p = 78000. # Pa, Pressure at gondola   
     Sw = 1.00 # Saturation with respect to water
     r_0 = 2.5e-6 # m size of splinter
@@ -273,8 +271,6 @@ def diffusional_growth_plates(T,d_max):
     
     r=r_0
     m = mass_hexagon(r)
-    # a,h = baselength(m,ar,T)
-    # d_hex = 2*a
     d_hex = diam_hexagon(m)
     t = 0  
     dia = np.array([2*r])
@@ -282,9 +278,7 @@ def diffusional_growth_plates(T,d_max):
     i = 0
     #Effects of thermal accommodation and deposition coefficients on the growth of small crystals
     while d_hex <d_max:
-        # a,h = baselength(m,ar,T)
         dm = ((t1*C0_plate(r)*ff(nd,rd,r)*fv(w,d,T,p))/(Fk/fa(m,T,p) + Fd/fy(m,T,p)))*dt
-        # d_hex = 2*a
         m = m + dm
         d_hex = diam_hexagon(m)
         r = d_hex/2

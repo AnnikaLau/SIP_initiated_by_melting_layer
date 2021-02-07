@@ -5,8 +5,8 @@ iData_small = iData;
 clear iData
 load('C:\melting_layer\Data\HoloGondel\ice_habits_cD')
 
-leg = {'CDNC (*10^{-3})','CDNC (d>40µm)','ICNC','Plates'};%
-classes = {'Water','Water40','Ice','Ice_Plate'};%
+leg = {'CDNC (*10^{-3})','CDNC (d>40µm)','ICNC','Plates'};
+classes = {'Water','Water40','Ice','Ice_Plate'};
 mark = {'o','o','h','d','s','*','k','^'};
 mfc = {'none','flat','none','none','none','none','none','none'};   %Marker face color
 mec = {'flat','none','flat','flat','flat','flat','flat','flat'};   %Marker edge color
@@ -48,24 +48,6 @@ for i = 1:length(classes)
     conc_unc = [conc_unc;unc.(classes{i})];
 end
 
-% %Concentration over time
-% for r=1:size(runs,1)
-%     clear pos
-%     pos = find(this.tsData.Total.time >= runs(r,1) & this.tsData.(classes{i}).time <= runs(r,2));
-%     volume(r) = sum(this.tsData.Total.data.volume(pos));
-%     volume_small(r) = sum(iData.Total.volume(pos));
-%     for c = 1:length(classes)
-%         if isequal(classes{c},'Water')
-%             totCount_time.(classes{c})(r,1) = sum(this.tsData.(classes{c}).data.totalCount(pos));
-%             conc_time.(classes{c})(r,1) = sum(this.tsData.(classes{c}).data.totalCount(pos))*1e-3/volume(r)+...
-%                 sum(iData.(classes{c}).totalCount(pos))*1e-3/volume_small(r);
-%         else
-%             totCount_time.(classes{c})(r,1) = sum(this.tsData.(classes{c}).data.totalCount(pos));
-%             conc_time.(classes{c})(r,1) = sum(this.tsData.(classes{c}).data.totalCount(pos))*1e-3/volume(r);
-%         end
-%     end
-% end
-
 
 figure(f)
 f = f+1;
@@ -90,7 +72,6 @@ datetick('x','keepticks','keeplimits')
 ylim(ylimi)
 xlim([tstart tend])
 xlabel('Time (UTC)','Fontsize',fs)
-% ylabel('Particle conc. (cm^{-3})','Fontsize',fs)
 set(gca,'FontSize',fs)
 xtickangle(45)
 set(gca, 'YScale', 'log')

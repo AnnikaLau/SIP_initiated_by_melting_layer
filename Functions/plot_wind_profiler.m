@@ -1,4 +1,5 @@
 %Plot wind profiler
+%Data available at http://dx.doi.org/10.16904/envidat.130
 T = readtable('C:\melting_layer\Data\wind_profiler\wp_high_20190222_dav.csv', 'HeaderLines',1);
 wp.u = table2array(T(:,6));
 wp.v = table2array(T(:,7));
