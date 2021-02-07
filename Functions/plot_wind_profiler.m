@@ -1,6 +1,5 @@
-%Plot wind profiler
-%Data available at http://dx.doi.org/10.16904/envidat.130
-T = readtable('C:\melting_layer\Data\wind_profiler\wp_high_20190222_dav.csv', 'HeaderLines',1);
+function plot_wind_profiler(wind_path)
+T = readtable(wind_path, 'HeaderLines',1);
 wp.u = table2array(T(:,6));
 wp.v = table2array(T(:,7));
 t = table2array(T(:,1));
@@ -43,7 +42,7 @@ if ~isempty(wp)
     xtickangle(45)
     width_barbs =1;
     
-    plot_wind_barbs(wp_u,wp_v,wp_t,wp_z*1e-3,width_barbs,[],1.5,speed_lims);
+    windbarbs(wp_u,wp_v,wp_t,wp_z*1e-3,width_barbs,[],1.5,speed_lims);
     
     ylabel('Altitude (km)')
     set(gca,'Fontsize',14)
@@ -54,3 +53,4 @@ if ~isempty(wp)
     
 end
 
+end

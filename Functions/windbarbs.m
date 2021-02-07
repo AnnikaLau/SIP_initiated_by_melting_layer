@@ -1,4 +1,5 @@
-function [h_barb_handles,brbindx,speed_lims] = plot_wind_barbs(u,v,x,y,varargin)
+%Adapted version of: https://github.com/johnckealy/matlab-skewT/blob/master/plot_windbarb.m
+function [h_barb_handles,brbindx,speed_lims] = windbarbs(u,v,x,y,varargin)
 % [h_barb_handles,brbindx,speed_lims] = windbarbs(u,v,x,y,[scale],[units],...
 %                                        [linewidth],[speed_lims],[color])
 %
@@ -8,15 +9,6 @@ function [h_barb_handles,brbindx,speed_lims] = plot_wind_barbs(u,v,x,y,varargin)
 %                   Pierre Huguenin (MeteoSwiss)
 %
 % ------------------------------------------------------------------------
-% [h_barb_handles,brbindx] = plot_windbarb(u,v,lat,lon,scale,units);
-%
-% plot_windbarb takes u,v components of the windfield
-% and plots them as standard meteorological wind-barbs.
-% Scale adjusts the size(s) of the barbs while lat determines
-% if the barbs are clockwise (northern hemisphere) or
-% anti-clockwise pointing.
-%
-%
 % input:
 %   u,v     components of the wind field.
 %   y,x the latitude, longitude (or lat,lon) coordinates of the u,v data.
