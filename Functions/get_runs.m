@@ -1,8 +1,6 @@
-
-function runs = get_runs()
-
+function runs = get_runs(runs)
 n_runs = 9;
-fileID =fopen('C:\melting_layer\Data\HoloGondel\190222_runs_gondola_up.txt','r');
+fileID =fopen(runs,'r');
 formatSpec ='%d%s%d%s%2d\n';
 sizeA = [5,n_runs*2];
 A = fscanf(fileID,formatSpec,sizeA);

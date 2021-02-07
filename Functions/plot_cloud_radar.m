@@ -1,12 +1,4 @@
-% Cloudnet quicklooks Davos: http://lacros.rsd.tropos.de/cloudnet/cloudnet.php?site=davos&year=2019&month=02&day=22&plot=1
-% ncpath= 'Z:\3_Data\Davos2019\Cloudnet\processed\categorize\2019\'
-% ncpath= 'C:\melting_layer\Data\Cloudnet\';
-% YMD = '20190222';
-% [radar,height,~] = read_cloud_radar(ncpath,YMD);
-% startDate=datenum(2019,02,22,06,00,00);
-% endDate=datenum(2019,02,22,12,00,00);
-
-function plot_cloud_radar(radar,height,startDate,endDate)
+function plot_cloud_radar(radar,height,startDate,endDate,runs)
 %Fontsize:
 fs = 20;
 datax = radar.time;
@@ -83,7 +75,6 @@ end_m = '20190222100000';
 start_m = datenum(start_m,'yyyymmddHHMMSS');
 end_m = datenum(end_m,'yyyymmddHHMMSS');
 %Create lines for runs of Gotschnabahn
-runs = get_runs();
 y_runs = zeros(size(runs));
 y_runs(:,1) = 1.8;
 y_runs(:,2) = 2.3;

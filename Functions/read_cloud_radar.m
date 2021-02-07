@@ -1,5 +1,3 @@
-%ncpath= 'Z:\3_Data\Davos2019\Cloudnet\processed\categorize\2019\'
-%YMD = '20190222'
 function [radar_data,radar_height,model_height] = read_cloud_radar(ncpath,YMD)
 filepath = [ncpath,YMD,'_davos_categorize.nc'];
 ncdisp(filepath)
