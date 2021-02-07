@@ -1,15 +1,15 @@
-load('Z:\6_Auswertung\Annika\2019_RACLETS\Wolken\2019_02_22\GE25e-6\RACLETS_merged_8-10h_rescaled_habits_wolke')
-temp1 = classificationData(this);
-V = sum(this.tsData.Ice.data.volume);
+load('C:\melting_layer\Data\HoloGondel\ice_habits_cD');
+source = 'C:\melting_layer\Data\HoloGondel\RACLETS_merged_8-10h_rescaled_habits.nc';
+V = sum(ncread(source,'Total_volume'));
 habits = {'Ice_Plate','Ice_Unidentified','Ice_Column','Ice_Irregular','Ice_Aged'};
 apply_rules(temp1,'classes',habits);
 mr = find(contains(temp1.metricnames,'majsizRescale')==1);
 majsizRescale = temp1.metricmat(:,mr);
-class = temp1.class;
+class = temp1.cpType;
 fs = 30;
 
 for i = 1:length(habits)
-    totalCount.(habits{i}) = sum(this.tsData.(habits{i}).data.totalCount);
+    totalCount.(habits{i}) = sum(contains(class,habits{i}));
     conc.(habits{i}) = totalCount.(habits{i})*1e-3/V;
     majsiz.(habits{i}) = majsizRescale(temp1.class == habits{i});
     unc.(habits{i}) = get_uncertainty_ice(majsiz.(habits{i}),V)*1e-3;
@@ -17,8 +17,8 @@ end
 
 %Small plates
 s = find(majsizRescale<100e-6);
-p = find(contains(temp1.cpType,'Plate')==1);
-u = find(contains(temp1.cpType,'Unidentified')==1);
+p = find(contains(temp1.cpType,'Ice_Plate')==1);
+u = find(contains(temp1.cpType,'Ice_Unidentified')==1);
 C = [intersect(s,p);intersect(s,u)];
 totalCount.Small_plates = length(C);
 conc.Small_plates = totalCount.Small_plates*1e-3/V;
