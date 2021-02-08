@@ -1,3 +1,4 @@
+% Downloaded from https://www.mathworks.com/matlabcentral/fileexchange/24497-rgb-triple-of-color-name-version-2
 
 % RGB  Rgb triple for given CSS color name
 %

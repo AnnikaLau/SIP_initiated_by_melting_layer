@@ -1,6 +1,6 @@
-source_big = 'C:\melting_layer\Data\HoloGondel\RACLETS_merged_8-10h_rescaled_habits.nc';
-source_small = 'C:\melting_layer\Data\HoloGondel\RACLETS_merged_8-10h_lt_25e-6.nc';
-load('C:\melting_layer\Data\HoloGondel\ice_habits_cD')
+function plot_conc_time(source_big,source_small,ice_crystals,runs)
+
+load(ice_crystals)
 
 leg = {'CDNC (*10^{-3})','CDNC (d>40µm)','ICNC','Plates'};
 classes = {'Water','Water40','Ice','Ice_Plate'};
@@ -11,7 +11,6 @@ col = [rgb('SteelBlue');rgb('SteelBlue');rgb('Red');rgb('Red');rgb('Red');rgb('G
 ls = {'-','--','-','--','--','--','--','--'};
 tstart = datenum(2019,2,22,8,0,0);
 tend = datenum(2019,2,22,10,0,0);
-runs = get_runs();
 ylimi=[1e-1 1e3];
 
 close all

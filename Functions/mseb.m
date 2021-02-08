@@ -1,3 +1,4 @@
+% Downloaded from https://www.mathworks.com/matlabcentral/fileexchange/47950-mseb-x-y-errbar-lineprops-transparent
 function H = mseb(x,y,errBar,lineProps,transparent)
 % H = MSEB(x,y,errBar,lineProps,transparent)
 %

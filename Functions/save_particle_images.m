@@ -1,4 +1,6 @@
 % per is percentage of images that will randomly be saved
+% Randomly saves x% of all ice crystals as a scaled image and as an image
+% with the orignal size
 function save_particle_images(ice_crystals,saving_folder,per)
 load(ice_crystals)
 map = gray;
