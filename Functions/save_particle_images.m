@@ -1,9 +1,6 @@
-% cD_data = 'C:\melting_layer\Data\HoloGondel\ice_habits_cD';
-% saving_folder = 'C:\hologondel_analysis\Plots\Particle_images';
-% prop = 100; %percentage of images that will be saved
-
-function save_particle_images(cD_data,saving_folder,prop)
-load(cD_data)
+% per is percentage of images that will randomly be saved
+function save_particle_images(ice_crystals,saving_folder,per)
+load(ice_crystals)
 map = gray;
 
 for i = 1:length(temp1.prtclIm)
@@ -22,11 +19,10 @@ for i = 1:length(temp1.prtclIm)
     t = t(12:19);
     
     %Get random selection
-    r = 100/prop;
-    s = randi([1 r]);
-    
+    s = rand;
+       
     %% Save random particles not scaled
-    if s == 1
+    if s <= per/100
         imwrite(h, fullfile(saving_folder,strcat(t,'_',temp1.cpType{i},'_',num2str(i),'_scaled','.png')))
         imwrite(framedata,fullfile(saving_folder,strcat(t,'_',temp1.cpType{i},'_',num2str(he),'_height','.png')))
     end
