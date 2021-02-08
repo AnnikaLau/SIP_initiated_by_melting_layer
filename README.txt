@@ -64,7 +64,11 @@ Functions: plot_temp_RH_Klosters_gondola.py, read_log_files.py, read_time_rides.
 Data: /Data/HoloGondel/190222_holimo_log.txt, /Data/HoloGondel/190222_runs_gondola_up.txt, /Data/weather_stations/raclets_weather_klosters.mat
 
 Run on Python:
-run plot_temp_RH_Klosters_gondola.py
+from plot_temp_RH_Klosters_gondola import *
+path_log_file = 'C:/melting_layer/Data/HoloGondel/190222_holimo_log.txt'
+path_time_rides 'C:/melting_layer/Data/HoloGondel/190222_runs_gondola_up.txt'
+path_data_Klosters = 'C:/melting_layer/Data/weather_stations/raclets_weather_klosters.mat'
+plot_temp_RH_Klosters_gondola(path_log_file,path_time_rides,path_data_Klosters)
 
 
 
