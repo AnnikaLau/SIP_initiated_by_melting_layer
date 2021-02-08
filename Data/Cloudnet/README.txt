@@ -1,0 +1,1 @@
+Origin: http://lacros.rsd.tropos.de/cloudnet/cloudnet.php?site=davos&year=2019&month=02&day=22&plot=1

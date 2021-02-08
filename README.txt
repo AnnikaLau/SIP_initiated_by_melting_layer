@@ -3,7 +3,7 @@ Figure 1
 Plot DHM with measurement locations
 
 Origin: https://shop.swisstopo.admin.ch/de/products/height_models/dhm25200, last access: 9 March 2020
-Functions: plot_DHM, xyzread, xyz2grid, cbarrow
+Functions: plot_DHM.m, xyzread.m, xyz2grid.m, cbarrow.m
 Data: /Data/DHM25/DHM200.xyz
 
 [x,y,z] = xyzread('C:\melting_layer\Data\DHM25\DHM200.xyz');
