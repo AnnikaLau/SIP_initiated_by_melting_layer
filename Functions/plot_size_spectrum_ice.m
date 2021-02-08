@@ -1,8 +1,7 @@
-load('C:\melting_layer\Data\HoloGondel\ice_habits_cD');
-source = 'C:\melting_layer\Data\HoloGondel\RACLETS_merged_8-10h_rescaled_habits.nc';
-V = sum(ncread(source,'Total_volume'));
+function plot_size_spectrum_ice(ice_crystals,V_source)
+load(ice_crystals)
+V = sum(ncread(V_source,'Total_volume'));
 habits = {'Ice_Plate','Ice_Unidentified','Ice_Column','Ice_Irregular','Ice_Aged'};
-apply_rules(temp1,'classes',habits);
 mr = find(contains(temp1.metricnames,'majsizRescale')==1);
 majsizRescale = temp1.metricmat(:,mr);
 class = temp1.cpType;
@@ -38,9 +37,9 @@ y = y/(V*1e3);
 y = y';
 
 
-figure(2)  
+figure(2)
 bar(y,1,'stacked');
-xlim([0.5, 10.5]) 
+xlim([0.5, 10.5])
 edges = 0.5:1:10.5;
 xticks(edges)
 xticklabels({'25','39','60','93','145','224','347','537','832','1288','1995'})
@@ -66,4 +65,4 @@ small_plates = sum(y(1:3,1:2),2);
 hold on
 bar(small_plates,1,'FaceAlpha',0)
 legend(cla_new)
-
+end
