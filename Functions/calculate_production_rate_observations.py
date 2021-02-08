@@ -5,7 +5,7 @@ Created on Thu Jan 14 15:18:19 2021
 @author: Annika
 """
 
-
+import numpy as np
 from diffusional_growth_plates import*
 
 t93_271,t60_271,t39_271 = diffusional_growth_plates(271,93e-6)
@@ -32,5 +32,7 @@ max_Gsp_39_93 = 60*(conc_39_93+conc_39_93_unc)/t93_39_271
 min_Gsp = max(min_Gsp_39_93,min_Gsp_60_93)
 max_Gsp = min(max_Gsp_39_93,max_Gsp_60_93)
 
-mean_Gsp = (min_Gsp+max_Gsp)/2
-unc_Gsp = (max_Gsp-min_Gsp)/2
+mean_Gsp = np.round((min_Gsp+max_Gsp)/2,2)
+unc_Gsp = np.round((max_Gsp-min_Gsp)/2,2)
+
+print('The splinter generation rate of the case study is ', mean_Gsp, '\pm', unc_Gsp)

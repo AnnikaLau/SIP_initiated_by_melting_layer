@@ -172,7 +172,7 @@ def diffusional_growth_plates(T,d_max):
     Fd = (Rv*T)/(Dv(T,p)*e_si(T))
     t1 = 4*pi*(Si(Sw,T)-1)
     
-    print('Time of ice particle to grow to',round(d_max*1e6),'mum at a temperature of ',T,'°C with the following assumptions:')
+    #print('Time of ice particle to grow to',round(d_max*1e6),'mum at a temperature of ',T,'°C with the following assumptions:')
     dt = 0.1
     
     r=r_0
@@ -191,7 +191,7 @@ def diffusional_growth_plates(T,d_max):
         d_hex = diam_hexagon(m)
         t = t+dt
         
-    print('Diffusional growth of stationary spherical ice crystal, using mass for calculation of plate size:',round(t),'s')
+    #print('Diffusional growth of stationary spherical ice crystal, using mass for calculation of plate size:',round(t),'s')
     
     
     r=r_0
@@ -210,7 +210,7 @@ def diffusional_growth_plates(T,d_max):
         # a,h = baselength(m,ar,T)
         # d_hex = 2*a
     
-    print('Diffusional growth of stationary spherical ice crystal:',round(t),'s')
+    #print('Diffusional growth of stationary spherical ice crystal:',round(t),'s')
     
     
     r=r_0
@@ -229,7 +229,7 @@ def diffusional_growth_plates(T,d_max):
         d_hex = diam_hexagon(m)
         t = t+dt
         
-    print('Diffusional growth of stationary plate:',round(t),'s')
+    #print('Diffusional growth of stationary plate:',round(t),'s')
     
     r=r_0
     m = mass_hexagon(r)
@@ -247,7 +247,7 @@ def diffusional_growth_plates(T,d_max):
         d_hex = diam_hexagon(m)
         t = t+dt
     
-    print('Diffusional growth of falling plate with coexistant cloud droplets:',round(t),'s')
+    #print('Diffusional growth of falling plate with coexistant cloud droplets:',round(t),'s')
     
     
     
@@ -267,7 +267,7 @@ def diffusional_growth_plates(T,d_max):
         # d_hex = diam_hexagon(m)
         t = t+dt
     
-    print('Diffusional growth of stationary column with an aspect ratio of',round(1/ar),':',round(t),'s')
+    #print('Diffusional growth of stationary column with an aspect ratio of',round(1/ar),':',round(t),'s')
     
     r=r_0
     m = mass_hexagon(r)
@@ -286,7 +286,7 @@ def diffusional_growth_plates(T,d_max):
         t = np.append(t,t[i]+dt)
         i = i+1
     
-    print('Diffusional growth of falling plate with coexistant cloud droplets including heat and vapor exchange:',round(t[-1]),'s')
+    #print('Diffusional growth of falling plate with coexistant cloud droplets including heat and vapor exchange:',round(t[-1]),'s')
     
     
     
@@ -297,8 +297,8 @@ def diffusional_growth_plates(T,d_max):
     t60 = t[find_min(dia,60e-6)]
     t39 = t[find_min(dia,39e-6)]
     
-    print('Time span crystals with a diameter between 60 and 93mum formed:',(t93-t60)/60,'minutes at a temperature of',T,'°C')
-    print('Time span crystals with a diameter between 39 and 93mum formed:',(t93-t39)/60,'minutes at a temperature of',T,'°C')
+    print('Time span crystals with a diameter between 60 and 93mum formed:',np.round((t93-t60)/60,2),'minutes at a temperature of',T,'°C')
+    print('Time span crystals with a diameter between 39 and 93mum formed:',np.round((t93-t39)/60,2),'minutes at a temperature of',T,'°C')
 
     return t93, t60, t39
 

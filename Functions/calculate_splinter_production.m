@@ -1,15 +1,15 @@
-function [aNsp,aNsp_new] = calculate_splinter_production()
-%Load all particles larger than 40µm
-load('C:\melting_layer\Data\HoloGondel\droplets_ge_40e-6_cD');
+function [aNsp,aNsp_new] = calculate_splinter_production(droplets,ice_crystals, V_source)
+%Load all droplets larger than 40µm
+load(droplets);
 d = temp1.metricmat(:,114);
 d = sort(d);
 %Droplet concentration:
-V = 43.7e-3;
+V = sum(ncread(V_source,'Total_volume'));
 n_d = length(d);
 d_conc = n_d/V;
 d_unc = sqrt(n_d)/V + 0.06*d_conc;
 %load ice crystal data
-load('C:\melting_layer\Data\HoloGondel\ice_habits_cD')
+load(ice_crystals)
 a = temp1.metricmat(:,114);
 class = temp1.cpType;
 
@@ -87,8 +87,7 @@ s_unc = (s_max-s_min)/2;
 disp(strcat('A droplet with 200µm produces ',{' '}, num2str(s_mean),'\pm',...
     num2str(s_unc),' splinters'))
 
-
 % %Number of fragments after tuning
 aNsp_new = (aNsp3_max+aNsp3_min)/2;
-yGsp_d_new = yfcol_d*aNsp_new.*d;
+
 end
