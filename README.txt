@@ -13,7 +13,8 @@ Functions: plot_DHM.m, xyzread.m, xyz2grid.m, cbarrow.m
 Data: /Data/DHM25/DHM200.xyz
 
 Run on MATLAB:
-[x,y,z] = xyzread('C:\melting_layer\Data\DHM25\DHM200.xyz');
+path_DHM = '.../Data/DHM25/DHM200.xyz';
+[x,y,z] = xyzread(path_DHM);
 grid = xyz2grid(x,y,z);
 xpos = [-10 10];
 ypos = [-10 10];
@@ -31,8 +32,8 @@ Functions: read_cloud_radar.m, plot_cloud_radar.m, get_runs.m
 Data: /Data/HoloGondel/190222_runs_gondola_up.txt, /Data/Cloudnet/20190222_davos_categorize.nc
 
 Run on MATLAB:
-ncpath= 'C:\melting_layer\Data\Cloudnet\';
-runs_path = 'C:\melting_layer\Data\HoloGondel\190222_runs_gondola_up.txt';
+ncpath= '.../Data/Cloudnet/';
+runs_path = '.../Data/HoloGondel/190222_runs_gondola_up.txt';
 YMD = '20190222';
 [radar,height,~] = read_cloud_radar(ncpath,YMD);
 startDate=datenum(2019,02,22,06,00,00);
@@ -48,8 +49,8 @@ Functions: get_Klosters_data_from_files.m, plot_ceilometer.m, magma.m
 Data: /Data/Ceilometer, /Data/HoloGondel/190222_runs_gondola_up.txt
 
 Run on MATLAB:
-root_folder='C:\melting_layer\Data\Ceilometer\';
-runs_path = 'C:\melting_layer\Data\HoloGondel\190222_runs_gondola_up.txt';
+root_folder='.../Data/Ceilometer/';
+runs_path = '.../Data/HoloGondel/190222_runs_gondola_up.txt';
 start_str = '20190222060000';
 end_str = '20190222120000';
 [cl31, ~, ~]=get_Klosters_data_from_files(start_str,end_str,root_folder);
@@ -64,10 +65,10 @@ Functions: plot_temp_RH_Klosters_gondola.py, read_log_files.py, read_time_rides.
 Data: /Data/HoloGondel/190222_holimo_log.txt, /Data/HoloGondel/190222_runs_gondola_up.txt, /Data/weather_stations/raclets_weather_klosters.mat
 
 Run on Python:
+path_log_file = '.../Data/HoloGondel/190222_holimo_log.txt'
+path_time_rides '.../Data/HoloGondel/190222_runs_gondola_up.txt'
+path_data_Klosters = '.../Data/weather_stations/raclets_weather_klosters.mat'
 from plot_temp_RH_Klosters_gondola import *
-path_log_file = 'C:/melting_layer/Data/HoloGondel/190222_holimo_log.txt'
-path_time_rides 'C:/melting_layer/Data/HoloGondel/190222_runs_gondola_up.txt'
-path_data_Klosters = 'C:/melting_layer/Data/weather_stations/raclets_weather_klosters.mat'
 plot_temp_RH_Klosters_gondola(path_log_file,path_time_rides,path_data_Klosters)
 
 
@@ -81,7 +82,7 @@ Functions: plot_wind_profiler.m, windbarbs.m, uv2ddff.m
 Data: /Data/wind_profiler/wp_high_20190222_dav.csv
 
 Run on MATLAB:
-wind_path = 'C:\melting_layer\Data\wind_profiler\wp_high_20190222_dav.csv';
+wind_path = '.../Data/wind_profiler/wp_high_20190222_dav.csv';
 plot_wind_profiler(wind_path)
 
 
@@ -92,7 +93,7 @@ Functions: get_wind_IDAWEB.py, plot_DHM.m, xyzread.m, xyz2grid.m,  windbarbs.m, 
 Data: /Data/DHM25/DHM200.xyz, /Data/IDAWEB/order_80401_data.txt
 
 Run on MATLAB:
-path_DHM = 'C:\melting_layer\Data\DHM25\DHM200.xyz';
+path_DHM = '.../Data/DHM25/DHM200.xyz';
 [x,y,z] = xyzread(path_DHM );
 grid = xyz2grid(x,y,z);
 xpos = [-17 10];
@@ -110,8 +111,8 @@ Functions: save_particle_images.m
 Data: /Data/HoloGondel/ice_habits
 
 Run on MATLAB:
-ice_crystals = 'C:\melting_layer\Data\HoloGondel\ice_habits';
-saving_folder = 'C:\melting_layer\Functions\Test';
+ice_crystals = '.../Data/HoloGondel/ice_habits';
+saving_folder = '.../Data/images/';
 per = 40;
 save_particle_images(ice_crystals,saving_folder,per)
 
@@ -123,8 +124,8 @@ Functions: plot_size_spectrum_ice.m, get_uncertainty_ice.m
 Data: /Data/HoloGondel/ice_habits.mat, /Data/HoloGondel/RACLETS_merged_8-10h_rescaled_habits.nc
 
 Run on MATLAB
-ice_crystals = 'C:\melting_layer\Data\HoloGondel\ice_habits';
-V_source = 'C:\melting_layer\Data\HoloGondel\RACLETS_merged_8-10h_rescaled_habits.nc';
+ice_crystals = '.../Data/HoloGondel/ice_habits';
+V_source = '.../Data/HoloGondel/RACLETS_merged_8-10h_rescaled_habits.nc';
 plot_size_spectrum_ice(ice_crystals,V_source)
 
 
@@ -138,10 +139,10 @@ Functions: plot_conc_time.m, get_uncertainty_ice.m, get_runs.m, rgb.m, mseb.m
 Data: /Data/HoloGondel/RACLETS_merged_8-10h_rescaled_habits.nc, /Data/HoloGondel/RACLETS_merged_8-10h_lt_25e-6.nc', /Data/HoloGondel/ice_habits.mat, /Data/HoloGondel/190222_runs_gondola_up.txt
 
 Run on MATLAB
-source_big = 'C:\melting_layer\Data\HoloGondel\RACLETS_merged_8-10h_rescaled_habits.nc';
-source_small = 'C:\melting_layer\Data\HoloGondel\RACLETS_merged_8-10h_lt_25e-6.nc';
-ice_crystals = 'C:\melting_layer\Data\HoloGondel\ice_habits';
-runs_path = 'C:\melting_layer\Data\HoloGondel\190222_runs_gondola_up.txt';
+source_big = '.../Data/HoloGondel/RACLETS_merged_8-10h_rescaled_habits.nc';
+source_small = '.../Data/HoloGondel/RACLETS_merged_8-10h_lt_25e-6.nc';
+ice_crystals = '.../Data/HoloGondel/ice_habits';
+runs_path = '.../Data/HoloGondel/190222_runs_gondola_up.txt';
 runs = get_runs(runs_path);
 plot_conc_time(source_big,source_small,ice_crystals,runs)
 
@@ -156,8 +157,8 @@ Functions: calculate_production_rate_observations.py, diffusional_growth_plates.
 Data: /Data/HoloGondel/RACLETS_merged_8-10h_rescaled_habits.nc, /Data/HoloGondel/droplets_ge_40e-6.mat, /Data/HoloGondel/ice_habits.mat
 
 Run on MATLAB
-V_source = 'C:\melting_layer\Data\HoloGondel\RACLETS_merged_8-10h_rescaled_habits.nc';
-droplets = 'C:\melting_layer\Data\HoloGondel\droplets_ge_40e-6';
-ice_crystals = 'C:\melting_layer\Data\HoloGondel\ice_habits';
+V_source = '.../Data/HoloGondel/RACLETS_merged_8-10h_rescaled_habits.nc';
+droplets = .../Data/HoloGondel/droplets_ge_40e-6';
+ice_crystals = '.../Data/HoloGondel/ice_habits';
 plot_parametrization_parameters(droplets, ice_crystals,V_source)
 
