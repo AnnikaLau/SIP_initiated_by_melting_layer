@@ -32,6 +32,5 @@ E.g.: concentration_water = ncread('RACLETS_merged_8-10h_rescaled_habits.nc','Wa
 
 
 
-
 *Schlenczek, O.: Airborne and Ground-based Holographic Measurement of Hydrometeors 
 in Liquid-phase, Mixed-phase and Ice Clouds, Ph.D. thesis, Universitätsbibliothek Mainz, 2018

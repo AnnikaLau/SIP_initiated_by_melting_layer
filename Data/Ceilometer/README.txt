@@ -1,1 +1,1 @@
-Origin: http://dx.doi.org/10.16904/envidat.127
+The data provided in this folder is part of the dataset by Hervo, M.: Ceilometer Klosters, http://dx.doi.org/10.16904/envidat.127, 2020.

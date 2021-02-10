@@ -1,7 +1,7 @@
 The folder "Functions" contains all code that was used for plotting of data and for calculations done for the corresponding published manuscript. 
 Functions holding different copyrights are stated in the README file in the folder "Functions".
-In the following, all functions and data used for each plot are named as well as the plotting routine. The original publication for each data is named under origin.
-All data used in the manuscript is also published together in 
+In the following, all functions and data used for each plot are named as well as the plotting routine. The original publication for all data is named under origin.
+All data used in the manuscript is also published or referenced to in 
 
 
 Figure 1
@@ -62,12 +62,12 @@ Temperature and RH plot
 
 Origin: HoloGondel, http://dx.doi.org/10.16904/envidat.129
 Functions: plot_temp_RH_Klosters_gondola.py, read_log_files.py, read_time_rides.py
-Data: /Data/HoloGondel/190222_holimo_log.txt, /Data/HoloGondel/190222_runs_gondola_up.txt, /Data/weather_stations/raclets_weather_klosters.mat
+Data: /Data/HoloGondel/190222_holimo_log.txt, /Data/HoloGondel/190222_runs_gondola_up.txt, /Data/Klosters_weather/raclets_weather_klosters.mat
 
 Run on Python:
 path_log_file = '.../Data/HoloGondel/190222_holimo_log.txt'
 path_time_rides '.../Data/HoloGondel/190222_runs_gondola_up.txt'
-path_data_Klosters = '.../Data/weather_stations/raclets_weather_klosters.mat'
+path_data_Klosters = '.../Data/Klosters_weather/raclets_weather_klosters.mat'
 from plot_temp_RH_Klosters_gondola import *
 plot_temp_RH_Klosters_gondola(path_log_file,path_time_rides,path_data_Klosters)
 
@@ -90,7 +90,7 @@ Plot DHM with wind
 
 Origin: https://shop.swisstopo.admin.ch/de/products/height_models/dhm25200, last access: 9 March 2020, Bundesamt für Meteorologie und Klimatologie, MeteoSchweiz
 Functions: get_wind_IDAWEB.py, plot_DHM.m, xyzread.m, xyz2grid.m,  windbarbs.m, cbarrow.m
-Data: /Data/DHM25/DHM200.xyz, /Data/IDAWEB/order_80401_data.txt
+Data: /Data/DHM25/DHM200.xyz, /Data/Wind/order_xxxxx_data.txt, /Data/Wind/Holfuy_data.csv
 
 Run on MATLAB:
 path_DHM = '.../Data/DHM25/DHM200.xyz';
