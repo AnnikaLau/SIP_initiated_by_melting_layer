@@ -25,7 +25,6 @@ unc.Small_plates = conc.Small_plates*0.15+sqrt(totalCount.Small_plates)*1e-3/V;
 majsiz.Small_plates = majsizRescale(C);
 
 [~,edges] = histcounts(log10(majsizRescale*1e6),10);
-%[~,edges] = histcounts(log10(x*1e6),9); %change if only particles larger than 40um are considered
 y = [];
 figure(1)
 for i=1:length(habits)

@@ -1,6 +1,6 @@
-function [aNsp,aNsp_new] = calculate_splinter_production(droplets,ice_crystals, V_source)
+function [aNsp,aNsp_new] = calculate_splinter_production(droplets_path,ice_crystals_path, V_source)
 %Load all droplets larger than 40µm
-load(droplets);
+load(droplets_path);
 d = temp1.metricmat(:,114);
 d = sort(d);
 %Droplet concentration:
@@ -9,7 +9,7 @@ n_d = length(d);
 d_conc = n_d/V;
 d_unc = sqrt(n_d)/V + 0.06*d_conc;
 %load ice crystal data
-load(ice_crystals)
+load(ice_crystals_path)
 a = temp1.metricmat(:,114);
 class = temp1.cpType;
 
@@ -24,7 +24,6 @@ aNsp = 9e4;
 yNsp_d = aNsp*d;
 
 %Amount of secondary ice per droplet with diameter d
-% aGsp = afcold.*apdf*aNsp;
 yGsp_d = ypdf_d.*yNsp_d.*yfcol_d;
 Gsp_d = sum(yGsp_d)/V;
 SI = num2str(round(mean(yGsp_d)*d_conc*60*1e-3,2));
@@ -34,7 +33,8 @@ disp(strcat('The splinter generation rate per minute per litre is ',{' '},SI,...
 
 %Find out new Nsp to explain observed production rate
 %Min and max production rate
-%Estimated splinter production rate of case study
+%Estimated splinter production rate of case study calculated with
+%calculate_production_rate_observations.py
 pr_min = (0.24-0.09)*1e3/60; %m^-3 s^-1
 pr_max = (0.24+0.09)*1e3/60; %m^-3 s^-1;
 
@@ -87,7 +87,7 @@ s_unc = (s_max-s_min)/2;
 disp(strcat('A droplet with 200µm produces ',{' '}, num2str(s_mean),'\pm',...
     num2str(s_unc),' splinters'))
 
-% %Number of fragments after tuning
+% Number of fragments after tuning
 aNsp_new = (aNsp3_max+aNsp3_min)/2;
 
 end

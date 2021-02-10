@@ -1,6 +1,3 @@
-%Vt_plate = 296*d^0.824 Pinsky & Khain 1997
-%Vt_droplet = k2*r; k2 = 8000/s, 40µm<r<600µm, Khvorostyanov and Curry 2002
-
 function f_col = get_fcol(d,a,class,V)
 
 V_d = get_fall_velocity(d,'Water');

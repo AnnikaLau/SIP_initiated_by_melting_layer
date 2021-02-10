@@ -64,8 +64,6 @@ pos = fig.Position;
 
 set(fig,'PaperPositionMode','Auto','PaperUnits','Centimeters','PaperSize',[pos(3), pos(4)])
 set(gca,'color','none');
-% ax1 = gca; % current axes
-% ax1.Position = [0.11 0.18 0.82 0.77];
 
 cl31.rcs_910_pos=cl31.rcs_910;
 cl31.rcs_910_pos(cl31.rcs_910_pos<=0)=NaN;
@@ -73,7 +71,6 @@ h1=pcolor(cl31.time,(cl31.range+1200)*1e-3,log10(cl31.rcs_910_pos)');
 shading flat;
 hold on;
 h2=plot(cl31.time,(cl31.cloud+1200)*1e-3,'.','Color',[0.7 0.7 0.7],'markerfacecolor',[0.7 0.7 0.7],'MarkerSize',8);
-%h3=plot(cl31.time,cl31.cloud_layer,'sk');
 ylim([1.200 3.000]);
 
 c=colorbar;

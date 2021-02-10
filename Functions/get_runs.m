@@ -1,6 +1,6 @@
-function runs = get_runs(runs)
+function runs = get_runs(path_runs)
 n_runs = 9;
-fileID =fopen(runs,'r');
+fileID =fopen(path_runs,'r');
 formatSpec ='%d%s%d%s%2d\n';
 sizeA = [5,n_runs*2];
 A = fscanf(fileID,formatSpec,sizeA);
