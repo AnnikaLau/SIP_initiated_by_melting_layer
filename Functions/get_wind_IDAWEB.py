@@ -15,7 +15,6 @@ def datetime_range(start, end, delta):
         current += delta
     
 
-#path = 'C:/melting_layer/Data/IDAWEB/order_80401_data.txt'
 def get_wind_IDAWEB(path):
 
     
@@ -34,14 +33,12 @@ def get_wind_IDAWEB(path):
             datapoints = all_data[x]
             datapoints = datapoints.split(';')
             data_new.append(datapoints)
-            #station.append(data[0])
             x = x+1
         data = np.array(data_new)
         for y in range(0,len(header)):
             dataset[header[y]] = data[:,y]
         data_name = dataset['stn'][0]
         datasets[data_name] = dataset
-        # print(data_name)
         x=x+1
         
     
@@ -95,11 +92,8 @@ def get_wind_IDAWEB(path):
     winddir_mean = {}
     #Get mean winddir
     for station in winddir.keys():
-        # east=[]
-        # east = np.where(winddir[station][start_time:end_time]>45) and np.where(winddir[station][start_time:end_time]<135)
         east = [(winddir[station][start_time:end_time]>45) & (winddir[station][start_time:end_time]<135)]
         e=sum(sum(east))
-        #south = np.where(winddir[station][start_time:end_time]>135) and np.where(winddir[station][start_time:end_time]<225)
         south = [(winddir[station][start_time:end_time]>135) & (winddir[station][start_time:end_time]<225)]
         s=sum(sum(south))
         west = [(winddir[station][start_time:end_time]>225) & (winddir[station][start_time:end_time]<315)]

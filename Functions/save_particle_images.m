@@ -1,8 +1,8 @@
-% per is percentage of images that will randomly be saved
-% Randomly saves x% of all ice crystals as a scaled image and as an image
-% with the orignal size
-function save_particle_images(ice_crystals,saving_folder,per)
-load(ice_crystals)
+% Randomly saves per% of all ice crystals as a scaled image and as an image
+% with the orignal size.
+
+function save_particle_images(cD_path,saving_folder,per)
+load(cD_path)
 map = gray;
 
 for i = 1:length(temp1.prtclIm)
@@ -14,8 +14,8 @@ for i = 1:length(temp1.prtclIm)
     axis tight off;
     frame = getframe(gca);
     framedata = frame.cdata;
-    he = size(h,1);
-    w = size(h,2);
+    he = size(h,1); %pixel height of image
+    w = size(h,2); %pixel width of image
     t = split(temp1.prtclID{i},'_');
     t = t{1};
     t = t(12:19);
@@ -23,7 +23,7 @@ for i = 1:length(temp1.prtclIm)
     %Get random selection
     s = rand;
        
-    %% Save random particles not scaled
+    %% Save random particles
     if s <= per/100
         imwrite(h, fullfile(saving_folder,strcat(t,'_',temp1.cpType{i},'_',num2str(i),'_scaled','.png')))
         imwrite(framedata,fullfile(saving_folder,strcat(t,'_',temp1.cpType{i},'_',num2str(he),'_height','.png')))
