@@ -1,7 +1,7 @@
 The folder "Functions" contains all code that was used for plotting of data and for calculations done for the corresponding published manuscript. 
 Functions holding different copyrights are stated in the README file in the folder "Functions".
-In the following, all functions and data used for each plot are named as well as the plotting routine. The original publication for all data is named under origin.
-All data used in the manuscript is also published or referenced to in 
+In the following, all functions and data used for each plot are named as well as the plotting routine. The original publication for each data is named under origin.
+All data used in the manuscript is also published together in 
 
 
 Figure 1
@@ -90,7 +90,7 @@ Plot DHM with wind
 
 Origin: https://shop.swisstopo.admin.ch/de/products/height_models/dhm25200, last access: 9 March 2020, Bundesamt für Meteorologie und Klimatologie, MeteoSchweiz
 Functions: get_wind_IDAWEB.py, plot_DHM.m, xyzread.m, xyz2grid.m,  windbarbs.m, cbarrow.m
-Data: /Data/DHM25/DHM200.xyz, /Data/Wind/order_xxxxx_data.txt, /Data/Wind/Holfuy_data.csv
+Data: /Data/DHM25/DHM200.xyz, /Data/Wind/order_80401_data.txt, /Data/Wind/Holfuy_data.csv
 
 Run on MATLAB:
 path_DHM = '.../Data/DHM25/DHM200.xyz';
@@ -111,10 +111,10 @@ Functions: save_particle_images.m
 Data: /Data/HoloGondel/ice_habits
 
 Run on MATLAB:
-ice_crystals = '.../Data/HoloGondel/ice_habits';
+ice_crystals_path = '.../Data/HoloGondel/ice_habits';
 saving_folder = '.../Data/images/';
 per = 40;
-save_particle_images(ice_crystals,saving_folder,per)
+save_particle_images(ice_crystals_path,saving_folder,per)
 
 
 Plot histogram of size distribution of ice crystal habits
@@ -124,9 +124,9 @@ Functions: plot_size_spectrum_ice.m, get_uncertainty_ice.m
 Data: /Data/HoloGondel/ice_habits.mat, /Data/HoloGondel/RACLETS_merged_8-10h_rescaled_habits.nc
 
 Run on MATLAB
-ice_crystals = '.../Data/HoloGondel/ice_habits';
+ice_crystals_path = '.../Data/HoloGondel/ice_habits';
 V_source = '.../Data/HoloGondel/RACLETS_merged_8-10h_rescaled_habits.nc';
-plot_size_spectrum_ice(ice_crystals,V_source)
+plot_size_spectrum_ice(ice_crystals_path,V_source)
 
 
 
@@ -141,10 +141,10 @@ Data: /Data/HoloGondel/RACLETS_merged_8-10h_rescaled_habits.nc, /Data/HoloGondel
 Run on MATLAB
 source_big = '.../Data/HoloGondel/RACLETS_merged_8-10h_rescaled_habits.nc';
 source_small = '.../Data/HoloGondel/RACLETS_merged_8-10h_lt_25e-6.nc';
-ice_crystals = '.../Data/HoloGondel/ice_habits';
+ice_crystals_path = '.../Data/HoloGondel/ice_habits';
 runs_path = '.../Data/HoloGondel/190222_runs_gondola_up.txt';
 runs = get_runs(runs_path);
-plot_conc_time(source_big,source_small,ice_crystals,runs)
+plot_conc_time(source_big,source_small,ice_crystals_path,runs)
 
 
 
@@ -158,7 +158,7 @@ Data: /Data/HoloGondel/RACLETS_merged_8-10h_rescaled_habits.nc, /Data/HoloGondel
 
 Run on MATLAB
 V_source = '.../Data/HoloGondel/RACLETS_merged_8-10h_rescaled_habits.nc';
-droplets = .../Data/HoloGondel/droplets_ge_40e-6';
-ice_crystals = '.../Data/HoloGondel/ice_habits';
-plot_parametrization_parameters(droplets, ice_crystals,V_source)
+droplets_path = .../Data/HoloGondel/droplets_ge_40e-6';
+ice_crystals_path = '.../Data/HoloGondel/ice_habits';
+plot_parametrization_parameters(droplets_path, ice_crystals_path,V_source)
 

@@ -1,8 +1,8 @@
 % Randomly saves per% of all ice crystals as a scaled image and as an image
 % with the orignal size.
 
-function save_particle_images(cD_path,saving_folder,per)
-load(cD_path)
+function save_particle_images(ice_crystals_path,saving_folder,per)
+load(ice_crystals_path)
 map = gray;
 
 for i = 1:length(temp1.prtclIm)

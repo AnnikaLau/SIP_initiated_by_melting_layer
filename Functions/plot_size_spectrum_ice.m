@@ -1,5 +1,5 @@
-function plot_size_spectrum_ice(ice_crystals,V_source)
-load(ice_crystals)
+function plot_size_spectrum_ice(ice_crystals_path,V_source)
+load(ice_crystals_path)
 V = sum(ncread(V_source,'Total_volume'));
 habits = {'Ice_Plate','Ice_Unidentified','Ice_Column','Ice_Irregular','Ice_Aged'};
 mr = find(contains(temp1.metricnames,'majsizRescale')==1);

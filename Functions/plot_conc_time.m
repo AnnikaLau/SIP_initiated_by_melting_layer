@@ -1,6 +1,6 @@
-function plot_conc_time(source_big,source_small,ice_crystals,runs)
+function plot_conc_time(source_big,source_small,ice_crystals_path,runs)
 
-load(ice_crystals)
+load(ice_crystals_path)
 
 leg = {'CDNC (*10^{-3})','CDNC (d>40µm)','ICNC','Plates'};
 classes = {'Water','Water40','Ice','Ice_Plate'};

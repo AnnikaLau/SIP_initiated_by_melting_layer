@@ -1,19 +1,19 @@
-function plot_parametrization_parameters(droplets, ice_crystals,V_source)
+function plot_parametrization_parameters(droplets_path, ice_crystals_path,V_source)
 
 fs = 25;
 ms = 400;
 tau = 60;
 V = sum(ncread(V_source,'Total_volume'));
 x = (40e-6:1e-7:400e-6)';
-load(droplets)
+load(droplets_path)
 d = temp1.metricmat(:,114);
 d = sort(d);
-load(ice_crystals)
+load(ice_crystals_path)
 a = temp1.metricmat(:,114);
 class = temp1.cpType;
 
 
-[aNsp,aNsp_new] = calculate_splinter_production(droplets,ice_crystals, V_source);
+[aNsp,aNsp_new] = calculate_splinter_production(droplets_path,ice_crystals_path, V_source);
 f_col_d = get_fcol(d,a,class,V);
 f_col_x = get_fcol(x,a,class,V);
 ypdf_x = get_pdf(x);
