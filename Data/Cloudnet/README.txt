@@ -1,1 +1,0 @@
-This dataset is based on data processed with Cloudnet. Cloudnet is member of the Aerosol, Clouds and Trace gases Research InfraStructure (ACTRIS) and data is available for numerous sites and times in addition to those published in Zenodo. See https://cloudnet.fmi.fi/ for details.

@@ -1,3 +1,0 @@
-The data was provided by the paragliding club Grischna (Holfuy_data.csv) and the Bundesamt für Meteorologie und Klimatologie, MeteoSwiss. The data from MeteoSwiss includes the ten minute average and/or the instantaneous value (Momentanwert) of the wind direction and the wind speed of the stations TSG (Arosa / Tschuggen), DAV (Davos), SLFPAR (Davos / Parsenn), NABDAV (Davos / Seehornwald), SLFSLF (Davos / Stilli), SLFWFJ (Davos / Weissfluhjoch), SLFKL3 (Klosters / Gatschiefer), SLFKL2 (Klosters / Madrisa), SLFKLO (Klosters / Sant Jaggem), SRS (Schiers), WFJ (Weissfluhjoch), ARO (Arosa), ARD (Arosa).
-
-
