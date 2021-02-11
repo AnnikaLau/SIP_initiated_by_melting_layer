@@ -1,14 +1,15 @@
-The folder "Functions" contains all code that was used for plotting of data and for calculations done for the corresponding published manuscript. 
-Functions holding different copyrights are stated in the README file in the folder "Functions".
+The folder "Software" contains all code that was used for plotting of data and for calculations done for the corresponding published manuscript "Continuous secondary ice production initiated by updrafts through the melting layer in mountainous regions" by Lauber et al. 2021, ACP. The corresponding data is published under https://doi.org/10.5281/zenodo.4534382.
+
+Functions holding different copyrights are stated in the README file in the folder "Software".
 In the following, all functions and data used for each plot are named as well as the plotting routine. The original publication for each data is named under origin.
-All data used in the manuscript is also published together in 
+
 
 
 Figure 1
 
 Plot DHM with measurement locations
 
-Origin: https://shop.swisstopo.admin.ch/de/products/height_models/dhm25200, last access: 9 March 2020
+Origin: https://shop.swisstopo.admin.ch/de/products/height_models/dhm25200
 Functions: plot_DHM.m, xyzread.m, xyz2grid.m, cbarrow.m
 Data: /Data/DHM25/DHM200.xyz
 
@@ -112,7 +113,7 @@ Data: /Data/HoloGondel/ice_habits
 
 Run on MATLAB:
 ice_crystals_path = '.../Data/HoloGondel/ice_habits';
-saving_folder = '.../Data/images/';
+saving_folder = '.../Data/HoloGondel/';
 per = 40;
 save_particle_images(ice_crystals_path,saving_folder,per)
 
