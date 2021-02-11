@@ -27,7 +27,7 @@ Figure 3
 
 Cloud radar plot
 
-Origin: Cloudnet quicklooks Davos: http://lacros.rsd.tropos.de/cloudnet/cloudnet.php?site=davos&year=2019&month=02&day=22&plot=1
+Origin: Cloudnet
 Functions: read_cloud_radar.m, plot_cloud_radar.m, get_runs.m
 Data: /Data/HoloGondel/190222_runs_gondola_up.txt, /Data/Cloudnet/20190222_davos_categorize.nc
 
@@ -79,10 +79,10 @@ Plot wind profiler
 
 Origin: http://dx.doi.org/10.16904/envidat.130
 Functions: plot_wind_profiler.m, windbarbs.m, uv2ddff.m
-Data: /Data/wind_profiler/wp_high_20190222_dav.csv
+Data: /Data/Wind_profiler/wp_high_20190222_dav.csv
 
 Run on MATLAB:
-wind_path = '.../Data/wind_profiler/wp_high_20190222_dav.csv';
+wind_path = '.../Data/Wind_profiler/wp_high_20190222_dav.csv';
 plot_wind_profiler(wind_path)
 
 
